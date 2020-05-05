@@ -1,0 +1,272 @@
+{% load static %}
+{% load social_share %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mathsample</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slick.css' %}">
+	<link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+	<div class="big-block header">
+		<div class="block">
+			<a href="" class="logo">
+				<img src="{% static 'images/logo.png' %}" alt="Mathsample.com">
+			</a>
+			<nav>
+				<a class="header-nav" href="#lessons">Lessons</a>
+				<a class="header-nav" href="#trainer">Trainer</a>
+                <a class="header-nav" href="#feedback">Feedback</a>
+				<a class="header-nav" href="#about">About</a>
+			</nav>
+		</div>
+	</div>
+	<div class="big-block baner">
+	</div>
+	<div class="big-block" id="lessons">
+		<div class="block classes-block">
+            {% for class in data  %}
+			<div class="class-block">
+				<p class="class-header">{{ class.name}}</p>
+				<div class="class-body">
+					<a class="class-link class-link-pdf" href="{{ class.file_question.url }}" download></a>
+
+                    <a class="class-link class-link-pdf" href="{{ class.file_answers.url }}" download></a>
+
+                    <a class="class-link class-link-pdf" href="{{ class.file_answers.url }}" download></a>
+
+                    <a class="class-link class-link-pdf" href="{{ class.file_answers.url }}" download></a>
+
+
+                     <!-- <div class="dropdown">
+                            <button class="btn" style="border-left:1px solid #0d8bf2">
+                                <i class="fa fa-share-alt"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                {% post_to_telegram "New Song: {{object.title}}"  class.file_question.url %}
+                                <a href="#">Link 2</a>
+                                <a href="#">Link 3</a>
+                            </div>
+                            </div>
+                        -->
+
+                    <div class="social class-social">
+
+                        <div class="dropdown">
+                            <a  id="dropdownButton" class="social-icon social-icon-linkedin"></a>
+                            <div class="dropdown-content">
+                                {% post_to_telegram  "Telegram" class.file_question.url %}
+                                {% post_to_facebook class.file_question.url "Facebook" %}
+                                {% post_to_linkedin object.title class.file_question.url "LinkedIn" %}
+                                {% post_to_twitter  class.file_question.url "Twitter" %}
+                                {% post_to_whatsapp class.file_question.url "WhatsApp" %}
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <a  id="dropdownButton" class="social-icon social-icon-linkedin" href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}"></a>
+                            <div class="dropdown-content">
+                                {% post_to_telegram  "Telegram" class.file_question.url  %}
+                                {% post_to_facebook class.file_question.url "Facebook" %}
+                                {% post_to_linkedin object.title class.file_question.url "LinkedIn" %}
+                                {% post_to_twitter  class.file_question.url "Twitter" %}
+                                {% post_to_whatsapp class.file_question.url "WhatsApp" %}
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <a  id="dropdownButton" class="social-icon social-icon-linkedin" href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}"></a>
+                            <div class="dropdown-content">
+                                {% post_to_telegram  "Telegram" class.file_question.url  %}
+                                {% post_to_facebook class.file_question.url "Facebook" %}
+                                {% post_to_linkedin object.title class.file_question.url "LinkedIn" %}
+                                {% post_to_twitter  class.file_question.url "Twitter" %}
+                                {% post_to_whatsapp class.file_question.url "WhatsApp" %}
+                            </div>
+                        </div>
+                        <div class="dropdown">
+                            <a  id="dropdownButton" class="social-icon social-icon-linkedin" href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}"></a>
+                            <div class="dropdown-content">
+                                {% post_to_telegram  "Telegram" class.file_question.url  %}
+                                {% post_to_facebook class.file_question.url "Facebook" %}
+                                {% post_to_linkedin object.title class.file_question.url "LinkedIn" %}
+                                {% post_to_twitter  class.file_question.url "Twitter" %}
+                                {% post_to_whatsapp class.file_question.url "WhatsApp" %}
+                            </div>
+                        </div>
+
+					</div>
+
+				</div>
+			</div>
+            {% endfor %}
+		</div>
+        <form  action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_s-xclick" >
+            <input type="hidden" name="hosted_button_id" value="P7VHUW943PDEE">
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" width="150" height="60" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button">
+            <img alt="" border="0" src="https://www.paypal.com/en_UA/i/scr/pixel.gif" width="1" height="1" >
+        </form>
+	</div>
+	<div class="big-block traine" id="trainer">
+		<div class="block">
+			<div class="calc">
+                <form method="post"  name="form">
+                    {% csrf_token %}
+                    <p class="calc-header">1 + 2 = <input type="number" name="answer" id="answer"></p>
+                    <div class="calc-numbers">
+                        <input type="button" class="calc-number" value="1" onclick="insert(1)">
+                        <input type="button" class="calc-number" value="2" onclick="insert(2)">
+                        <input type="button" class="calc-number" value="3" onclick="insert(3)">
+                        <input type="button" class="calc-number" value="4" onclick="insert(4)">
+                        <input type="button" class="calc-number" value="5" onclick="insert(5)">
+                        <input type="button" class="calc-number" value="6" onclick="insert(6)">
+                        <input type="button" class="calc-number" value="7" onclick="insert(7)">
+                        <input type="button" class="calc-number" value="8" onclick="insert(8)">
+                        <input type="button" class="calc-number" value="9" onclick="insert(9)">
+                        <input type="button" class="calc-number" value="0" onclick="insert(0)">
+                        <input type="button" class="calc-number" value="<" onclick="back()">
+                        <button class="calc-ready" type="submit" id="send_number">Go</button>
+
+                    </div>
+                </form>
+			</div>
+
+			<div class="train-else">
+				<div class="train-news-baner">
+					<img src="{% static 'images/news-baner.png' %}" alt="">
+				</div>
+				<!--<div class="train-carousel-block">
+					<div class="train-carousel">
+					<div>
+						<img src="{% static 'images/mathematical_example.png' %}" alt="">
+					</div>
+					<div>
+						<img src="{% static 'images/mathematical_example.png' %}" alt="">
+					</div>
+					<div>
+						<img src="{% static 'images/mathematical_example.png' %}" alt="">
+					</div>
+					<div>
+						<img src="{% static 'images/mathematical_example.png' %}" alt="">
+					</div>
+				    </div>
+				</div> -->
+				
+			</div>
+
+		</div>
+
+	</div>
+
+    <div class="big-block" id="feedback">
+        <div class="block">
+
+            <form class="feedback_form" action="{% url 'base' %}" method="POST">
+                {% csrf_token %}
+                <h1>Feedback</h1>
+                {{ form.username }}
+                {{ form.email }}
+                {{ form.text }}
+                <!--
+                <input type="text" id="feed_username" placeholder="Username" required>
+                <input type="email" id="feed_email" placeholder="Email" required>
+                <input class="text" type="text" id="feed_text" placeholder="Text" required>
+                -->
+                <input type="submit" value="Submit" id="submit_feedback">
+
+                {% if form.errors %}
+                <div class="error-from" >{{ form.errors }}</div>
+                {% endif %}
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message-from">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="big-block">
+        <div class="block userFeedback">
+            <h1>All user reviews</h1>
+
+            {% for feed in feedbacks %}
+            <div class="comment-list">
+                <header class="text-left">
+                    <div class="comment-user"><i class="fa fa-user"></i> {{ feed.username }}</div>
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{ feed.pub_date }}</time>
+                </header>
+                <div class="comment-post">
+                    <p>
+                      {{ feed.text }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="big-block about-us" id="about">
+		<div class="block">
+			<h2>about us</h2>
+			<p>
+                We are two programmers (Pavlo Golovachov and Vlad Shatalyuk) who strive for the development of society.
+                        We are completely open to the new and therefore everything on the website is free.
+
+                        The most important thing: Train on tasks every day and the result will be sure!
+                        Learn and train: you and your children will have a good future!
+
+                        Respectfully,
+                        Pavlo & Vlad
+				<br><br>Researches in mathematics education are primarily concerned with the tools, methods and approaches that facilitate practice or the study of practice; however, mathematics education research, known on the continent of Europe as the didactics or pedagogy of mathematics, has developed into an extensive field of study, with its own concepts, theories, methods, national and international organisations, conferences and literature. This article describes some of the history, influences and recent controversies.
+            </p>
+
+			<div class="social">
+
+				<a class="social-icon social-icon-facebook" href="#"></a>
+				<a class="social-icon social-icon-twitter" href="#"></a>
+				<a class="social-icon social-icon-linkedin" href="#"></a>
+				<a class="social-icon social-icon-googleplus" href="#"></a>
+			</div>
+
+		</div>
+	</div>
+	<div class="big-block bottom"></div>
+	<script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/slick.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'js/feedback.js' %}"></script>-->
+    <script>
+    $('body').on('click', function (e) {
+        if (e.target.className !== 'share')
+            $('.menu').css('display', 'none');
+        else
+            $('.menu').css('display', 'block');
+    });
+    </script>
+    <script>
+        function insert(num) {
+            document.form.answer.value = document.form.answer.value + num
+        }
+        function back() {
+            let exp = document.form.answer.value;
+            document.form.answer.value = exp.substring(0, exp.length-1)
+        }
+    </script>
+    {% if anchor %}
+    <script type='text/javascript'>
+    $(document).ready(function(){
+        window.location = '#{{ anchor }}'
+    });
+    </script>
+    {% endif %}
+</body>
+</html>
